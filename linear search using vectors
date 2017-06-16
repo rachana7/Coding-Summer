@@ -1,0 +1,37 @@
+
+#include <iostream>
+#include<vector>
+using namespace std;
+
+int main() {
+	int n,i,j,t,temp,as,x;
+	temp=0;
+	
+	vector<int>a;
+	cin>>t;
+	for(i=0;i<t;i++){
+	    a.clear();
+	    cin>>n;
+	    for(j=0;j<n;j++){
+	        cin>>as;
+	        a.push_back(as);
+	        
+	    }
+	    cin>>x;
+	    //cout<<"hey"<<a.size()<<endl;
+	    for(j=0;j<n;j++){
+	        if(a[j]==x){
+	        cout<<j<<endl;
+	        temp=1;
+	        break;
+	        }
+	    }
+	        if(temp==0)
+	        cout<<-1<<endl;
+	        
+	        
+	    
+	}
+	
+	return 0;
+}
