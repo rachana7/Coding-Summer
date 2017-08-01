@@ -1,0 +1,46 @@
+#include <iostream>
+#include<math.h>
+#include<vector>
+using namespace std;
+
+int main() {
+    int T,i,total_size,index_tobe_found,cost_1,cost_2,for_1,for_2,a,b,count,mid;
+    cin>>T;
+    
+    for(i=0;i<T;i++)
+    {
+        cin>>total_size;
+        cin>>index_tobe_found;
+        cin>>cost_1;
+        cin>>cost_2;
+        for_1=index_tobe_found*cost_1;
+       // cout<<"i:"<<i<<for_1<<endl;
+        
+        a=1;
+        b=total_size;
+        count=1;
+        mid=(total_size+1)/2;
+        while(mid!=index_tobe_found)
+        {
+            count++;
+            if(mid>index_tobe_found)
+            b=mid-1;
+            else a=mid+1;
+            mid=(a+b)/2;
+                
+            
+        }
+        for_2=count*cost_2;
+        //cout<<"i :"<<i<<for_2<<endl;
+        if(for_1>for_2)
+        cout<<"2"<<endl;
+        else if(for_1==for_2)
+        cout<<"0"<<endl;
+        else
+        cout<<"1"<<endl;
+        
+        
+    }
+	//code
+	return 0;
+}
