@@ -1,0 +1,48 @@
+#include<iostream>
+#include<vector>
+
+using namespace std;
+
+void selectionsort(vector<int> &a)
+{
+int min,final_j,n=a.size();
+	for(int i=0;i<n-1;i++)	
+	{
+		min=a[i];
+		for(int j=i+1;j<n;j++)
+		{
+			if(a[j]<min)
+			{
+				min=a[j];
+				final_j=j;
+			}	
+			
+		}
+		swap(a[final_j],a[i]);	
+		cout<<endl;
+		
+
+	}		
+
+}
+int main()
+{
+	vector<int> a;
+	int n;
+	cout<<"enter the size of the array"<<endl;
+	cin>>n;
+	a.resize(n);
+	for(int i=0;i<n;i++)
+	{
+		cin>>a[i];
+	}
+
+	//cout<<"check 1"<<endl;
+	
+	selectionsort(a);
+	for(int i=0;i<n;i++)
+	{
+		cout<<a[i]<<" ";
+	}
+
+}
