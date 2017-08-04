@@ -1,0 +1,74 @@
+#include<algorithm>
+#include<iostream>
+#include<vector>
+using namespace std;
+
+//find all triplets af a whose sum is equal to n
+
+/*void findsum( vector<int> &a,int val)
+{
+//bruteforce
+int count=0;
+int n=a.size();
+for(int i=0;i<n;i++)
+{
+	for(int j=i+1;j<n;j++)
+	{
+		for(int k=j+1;k<n;k++)
+		{
+			if(a[i]+a[j]+a[k]==val)
+			{
+				count++;
+				cout<<"Triplet "<<count<<a[i]<<" "<<a[j]<<" "<<a[k]<<endl;
+			}
+		}
+	}
+}
+}*/
+
+
+//O(n*n)
+
+void findsum(vector<int> &a,int val)
+{
+	int count=1;
+	int n=a.size(),k,j;
+	for(int i=0;i<n;i++)
+	{
+		for(j=i+1,k=n-1;j<k;)
+		{
+			if(((a[i]+a[j]+a[k])==val))
+			{
+				cout<<"Triplet "<<count<<": "<<a[i]<<" "<<a[j]<<" "<<a[k]<<endl;
+				count++;
+				j++;
+			}
+			else if(a[i]+a[j]+a[k]<val)
+			{
+				j++;
+			}
+			else
+				k--;
+		}
+	}
+}
+
+
+int main()
+{
+	vector<int> a;
+	int x,n,val;
+	cout<<"enter the size of the array"<<endl;
+	cin>>n;
+	a.resize(n);
+	for(int i=0;i<n;i++)
+	{
+		cin>>a[i];
+	}
+	cout<<"enter the value"<<endl;
+	cin>>val;
+	sort(a.begin(),a.end());
+	findsum(a,val);
+	
+	return 0;
+}
