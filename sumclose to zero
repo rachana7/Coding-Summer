@@ -1,0 +1,84 @@
+#include<algorithm>
+#include<iostream>
+#include<vector>
+using namespace std;
+
+void minsum(vector<int> &a)
+{
+	int i,n,cnt=0,init,fin,final_init,final_fin,min,minmax;
+	n=a.size();
+	for( i=0;i<n-1;i++)
+	{
+		if(a[i]<=0 && a[i+1]>=0)
+		{
+			init=i;
+			fin=i+1;
+			cout<<"stops "<<a[i]<<" "<<a[i+1]<<endl;
+			cnt=1;
+			break;
+			
+		}
+	}
+	if(cnt==0 && a[0]<0)
+	{
+		minmax=a[n-1]+a[n-2];
+	}
+	else if(cnt==0 &&a[0]>0)
+	{
+		minmax=a[0]+a[1];
+	}
+
+	 minmax=a[0]+a[1];
+	cout<<"initial minmax is "<<minmax<<endl;
+	while(init>=0 && fin<n)
+	{
+		 min=a[init]+a[fin];
+		cout<<"min: "<<min
+		if((abs(minmax)>abs(min))&&(min<0))
+		{
+			minmax=min;
+			final_init=init;
+			final_fin=fin;
+			fin=fin+1;<<" ";
+		}
+		else if((abs(minmax)>abs(min))&&(min>0))
+		{
+			minmax=min;
+			final_init=init;
+			final_fin=fin;
+			init=init-1;
+		}
+		else if(min<0)
+		{
+			fin=fin+1;
+		}
+		else if(min>0)
+		{
+			init=init-1;
+		}			
+	}
+	cout<<minsum<<" is minsum"<<endl;
+}
+
+int main()
+{
+	vector<int> a;
+	int x,n,val;
+	cout<<"enter the size of the array"<<endl;
+	cin>>n;
+	a.resize(n);
+	for(int i=0;i<n;i++)
+	{
+		cin>>a[i];
+	}
+	
+	sort(a.begin(),a.end());
+	for(int i=0;i<n;i++)
+	{
+		cout<<a[i];
+	}
+	cout<<endl<<"*************"<<endl;
+	minsum(a);
+	
+	return 0;
+}
