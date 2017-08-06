@@ -1,0 +1,305 @@
+#include<algorithm>
+#include<iostream>
+#include<vector>
+
+using namespace std;
+
+struct node
+	{
+	int data;
+	struct node *next;
+
+	};
+struct node *start=NULL;
+
+void create()
+{
+	struct node *temp;
+	int value;
+	temp=(struct node *)malloc(sizeof(struct node));
+	cout<<"enter the value to be inserted"<<endl;
+	cin>>value;
+	temp->data=value;
+	temp->next=temp;
+	start=temp;
+	cout<<"if you want to stop entering press 0"<<cout<<endl;
+	int c;
+	cin>>c;
+	while(c!=0)
+	{
+		y=(struct node *)malloc(sizeof(struct node));
+		cout<<"enter data : "<<endl;
+		cin>>value;
+		y->data=value;
+		temp->next=y;
+		y->next=start;
+		temp=start;
+		cout<<"press 0 to quit"<<endl;
+		cin>>c;
+
+	}
+}
+
+void insert_begin()
+{
+	x=start;
+	y=(struct node *)malloc(sizeof(struct node));
+	cout>"enter value"<<endl;
+	int val;
+	cin>>val;
+	y->data=val;
+
+	while(x->next!=start)
+	{
+		x=x->next;
+	}
+	x->next=y;
+	y->next=start;
+	start=y;
+}
+
+void insert_end()
+{
+	struct node *x;	
+	x=start;
+	y=(struct node *)malloc(sizeof(struct node));
+	cout>"enter value"<<endl;
+	int val;
+	cin>>val;
+	y->data=val;
+
+	while(x->next!=start)
+	{
+		x=x->next;
+	}
+	x->next=y;
+	y->next=start;
+	
+}
+void insert_middle()
+{
+	struct node *x,*z;
+	x=start;
+	if(start==NULL)
+	cout<<"cannot enter element at that place"<<endl;
+	y=(struct node *)malloc(sizeof(struct node));
+	cout>"enter value"<<endl;
+	int val;
+	cin>>val;
+	y->data=val;
+	int index;
+	cout<<"enter the position to be inserted: ";
+	cin>>index;
+	int count=1;
+	while(x->next!=start)
+	{
+		count++;
+		x=x->next;
+	}
+	count++;
+	if(index>count)
+	{
+		cout<<"index out of bound"<<endl;
+		return;
+	}
+	int c=1;
+	x=start;
+	while(c<index)
+	{	
+		z=x;
+		x=x->next;
+		c++;
+	}
+	y->next=x;
+	z->next=y;
+		
+}
+
+void delete_start()
+{
+	struct node * x,*y;
+	x=start;
+	y=start;
+	if(start==NULL)
+	cout<<"list empty"<<endl;
+	else
+	{
+	while(x->next!=start)
+		x=x->next;
+	start=start->next;
+	x->next=start;
+	free(y);
+	}
+}
+void delete_end()
+{
+	struct node * x;
+	x=start;
+	if(start==NULL)
+	cout<<"list empty"<<endl;
+	else
+	{
+	while(((x->next)->next)!=start)
+		x->next=start;
+}
+
+void delete_posn()
+{
+	struct node *x,*y;
+	if(start==NULL)
+	cout<<"list empty"<<endl;
+	else
+	{
+		int c=1,index;
+		cout<<"enter the position to be deleted"<<endl;
+		cin>>index;
+		x=head;
+		while(c<pos)
+		{
+			y=x;
+			x=x->next;
+		}
+		y->next=x->next;
+		free(x);
+
+}
+void display()
+{
+	if(start==NULL)
+	cout<<"list empty"<<endl;
+	else
+	{
+		struct node *x;
+		x=start;
+		while(x->next!=start)
+		{
+			cout<<x->data<<" ";
+			x=x->next;
+		}
+		cout<<x->data<<" ";
+	}
+}
+void search()
+{
+	int search_val;
+	int flag=0;
+	int count=1;
+	cout<<"enter the value to be searched : ";
+	cin>>search_val;
+	if(start==NULL)
+	cout<<"List empty"<<endl;
+	else
+	{
+		x=head;
+		while(x->next!=start)
+		{
+			if(x->data==search_val)
+			{
+				flag=1;
+				cout<<endl<<"element found at :"<<count;
+				break;
+			}
+			count++;
+			x=x->next;			
+		}
+		if(x->data=search_val)
+		{
+			cout<<"element found at :"<<count<<endl;
+			flag=1;
+		}
+		if(flag==0)
+		{
+			cout<<"element not found"<<endl;
+		}
+	}
+}
+void sort()
+{
+	struct node *x,*y;
+	if(start==NULL)
+	cout<<"List empty"<<endl;
+	else
+	{
+		x=start;
+		while(x->next!=start)
+		{
+			y=x->next;
+			while(y!=start)
+			{
+				if(y!=start)
+				{
+					if(x->data>y->data)
+					{
+						temp=y->data;
+						y->data=x->data;
+						x->data=temp;
+					}
+				}			
+				else
+				break;
+				y=y->next;
+			}
+			x=x->next;
+		}
+	}
+}
+void update()
+{
+	struct node * ptr;
+	int search_val;
+	int replace_val;
+	int flag=0;
+	
+	if(start==NULL)
+	cout<<"List empty"<<endl;		
+	cout<<"enter the value to be replaced : "<<endl;
+	cin>>search_val;
+	cout<<"enter value to be replaced : "<<endl;
+	cin>>replace_val;
+	ptr=start;
+	while(ptr->next!=NULL)
+	{
+		if(ptr->data==search_val)
+		{
+			ptr->data=replace_val;		
+			flag=1;
+			break;
+		}
+		ptr=ptr->next;
+	}
+	if(ptr->data==search_val)
+	{
+		ptr->data=replace_val;
+		flag=1;
+	}
+	if(flag==0)
+	cout<<search_val<<" not found"<<endl;
+	else cout<<"update successful"<<endl;
+}
+
+void rev_transverse(struct node *p)
+{
+	int i=0;
+	struct node *ptr;
+	if(start==NULL)
+	cout<<"List empty"<<endl;
+	else
+	{
+		if(p->next!=head)
+		{
+			i=p->data;
+			rev_transverse(p->next);
+			cout<<i<<" ";
+
+		}
+		if(p->next==head)
+		{
+			cout<<p->data<<" ";
+		}
+	}
+
+
+}
+
+
+	
