@@ -1,0 +1,201 @@
+#include<algorithm>
+#include<iostream>
+#include<vector>
+
+using namespace std;
+
+struct node
+	{
+	int data;
+	struct node *next;
+	struct node *prev;
+	};
+struct node *start=NULL;
+
+struct node * create()
+{
+	struct node *temp;
+	int value;
+	temp=(struct node *)malloc(sizeof(struct node));
+	cout<<"enter the value to be inserted"<<endl;
+	cin>>value;
+	temp->data=value;
+	temp->next=NULL;
+	temp->prev=NULL;
+	return temp;
+}
+void insert_begin()
+{
+	struct node *temp=create();
+	if(start==NULL)
+	{
+		start=temp;
+		return;
+	}	
+	start->prev=temp;
+	temp->next=start;
+	start=temp;
+}
+void insert_end()
+{
+	struct node *ptr;
+	struct node *temp=create();
+	if(start==NULL)
+	{
+		start=temp;
+		return;
+	}
+	ptr=start;
+	while(ptr->next!=NULL)
+	{
+		ptr=ptr->next;
+	}
+	ptr->next=temp;
+	temp->prev=ptr;
+	
+}
+void insert_middle()
+{
+	struct node *ptr;
+	int index;
+	struct node *temp=create();
+	if(start==NULL)
+	{
+		start=temp;
+		return;
+	}
+	ptr=start;
+	int count=1;
+	cout<<"enter the index to be inserted "<<endl;
+	cin>>index;
+	while(count!=index-1)
+	{
+		ptr=ptr->next;
+		count++;
+	}
+	temp->next=ptr->next;
+	(ptr->next)->prev=temp;
+	ptr->next=temp;
+	temp->prev=ptr;
+	
+	
+}
+void display()
+{
+	struct node *ptr;
+	if(start==NULL)
+	{
+		cout<<"list empty"<<endl;	
+		return;
+	}
+	else
+	{
+		ptr=start;
+		cout<<"elements present in the list: "<<endl;
+		while(ptr!=NULL)
+		{
+			cout<<ptr->data<<"  ";
+			ptr=ptr->next;
+		}
+	}
+
+}
+
+
+void delete_start()
+{
+	struct node * ptr;
+	ptr=start;
+	if(start==NULL)
+	{
+		cout<<"list empty"<<endl;
+	}
+	start=ptr->next;
+	start->prev=NULL;
+}
+void delete_end()
+{
+	struct node * ptr;
+	ptr=start;
+	if(start==NULL)
+	{
+		cout<<"list empty"<<endl;
+	}
+	while((ptr->next)->next==NULL)
+		ptr=ptr->next;
+	ptr->next=NULL;
+
+		
+}
+void delete_middle()
+{
+	struct node *ptr;
+	int index;
+	if(start==NULL)
+	{
+		cout<<"list empty"<<endl;
+	}
+	ptr=start;
+	int count=1;
+	cout<<"enter the index to be inserted "<<endl;
+	cin>>index;
+	while(count!=index-1)
+	{
+		ptr=ptr->next;
+		count++;
+	}
+	ptr->next=(ptr->next)->next;
+	((ptr->next)->next)->prev=ptr;
+	
+}
+int main()
+{
+	int choice;
+	
+	while(1)
+	{
+		cout<<"MENU : "<<endl;
+		//cout<<"1.create node "<<endl;
+		cout<<"1.display list"<<endl;
+		cout<<"2.Insert at the start"<<endl;
+		cout<<"3.Insert at the middle"<<endl;
+		cout<<"4.Insert at end"<<endl;
+		//cout<<"6.sort linked list"<<endl;
+		cout<<"5.delete from start"<<endl;
+		cout<<"6.delete from middle"<<endl;
+		cout<<"7.delete from end"<<endl;
+		 cin>>choice;
+		switch(choice)
+		{
+			//case 1:
+			//	create();
+			//	break;
+			case 1:
+				display();
+				break;
+			case 2:
+				insert_begin();
+				break;
+			case 3:
+				insert_middle();
+				break;
+			case 4:
+				insert_end();
+				break;
+			case 5:
+				delete_start();
+				break;
+			case 6:
+				delete_middle();
+				break;
+			case 7:
+				delete_end();
+				break;
+		}
+
+	}
+	
+	
+	//cout<<"count is :"<<count<<endl;
+	return 0;
+}
